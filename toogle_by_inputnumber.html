@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+	</style>
+</head>
+<body>
+	
+	<pre>
+		<div id="js-field-1621809076965">
+			input 1621809076965
+			<input min="0" max="100000000" required="" type="number" id="input1621809076965" name="1621809076965" value="" />
+		</div>
+		<div id="js-field-1621809101151">
+			div 1621809101151
+			<input type="text" name="1621809101151" value="" />
+		</div>
+		
+		<div id="js-field-1621811736405">
+			input 1621811736405
+			<input min="0" max="100000000" required="" type="number" id="input1621811736405" name="1621811736405" value="">	
+		</div>
+		<div id="js-field-1621811756445">
+			div 1621811756445
+			<input type="text" name="1621811756445" value="" />
+		</div>
+		
+		
+		If input "1621809076965" is "greater than 0" then show div "js-field-1621809101151".
+		
+		If input "1621811736405" is "greater than 1" then hide div "js-field-1621811756445".
+		
+		
+	</pre>
+	
+	
+	<script>
+
+		function toggleFunction(Array){
+			console.log(Array);
+			for(let i=0; i<Array.length; i++){
+				console.log(Array[i][0]);
+				console.log(Array[i][1]);
+				console.log(Array[i][2]);
+
+
+				//Hiding Divs by default
+				document.querySelector(Array[i][1]).style.display = "none";
+
+
+				//Getting input
+				let parameter1 = Array[i][0];
+				let parameter1Split = parameter1.split('-');
+				console.log(parameter1Split);
+
+				if(parameter1Split[1] === 'greater'){
+						
+					document.querySelector(parameter1Split[0]).oninput = function(){
+						console.log(document.querySelector(parameter1Split[0]).value);
+
+						if(document.querySelector(parameter1Split[0]).value > parseInt(parameter1Split[2])){
+							if(Array[i][2] === 1){
+								console.log("show div");
+								document.querySelector(Array[i][1]).style.display = "block";
+							
+							} else if(Array[i][2] === 0){
+								console.log("Hide div");
+								document.querySelector(Array[i][1]).style.display = "none";
+							}
+						} else if(document.querySelector(parameter1Split[0]).value <= parseInt(parameter1Split[2])){
+							if(Array[i][2] === 1){
+								console.log("Hide div");
+								document.querySelector(Array[i][1]).style.display = "none";
+							
+							} else if(Array[i][2] === 0){
+								console.log("Show div");
+								document.querySelector(Array[i][1]).style.display = "block";
+							}
+						}
+						
+					}
+					
+					
+				}
+				
+
+			}
+		}	
+
+		
+		window.onload = function(){
+			
+			toggleFunction([
+								['#input1621809076965-greater-0','#js-field-1621809101151',1],
+								['#input1621811736405-greater-1','#js-field-1621811756445',0]
+							]);
+		
+		}
+		
+	</script>
+	
+</body>
+</html>
+
+
+
+
